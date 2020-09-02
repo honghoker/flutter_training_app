@@ -45,63 +45,101 @@ class Programme extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(5),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Icon(
-                          Icons.play_arrow,
-                          color: Colors.white,
-                          size: 13,
+                          Icons.favorite,
+                          color: Colors.pink,
+                          size: 25,
                         ),
-                        Padding(padding: EdgeInsets.only(left: 5)),
-                        Text(
-                          Helper.numFormat(this.data.playsCount),
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
+                        // Padding(padding: EdgeInsets.only(left: 5)),
+                        // Text(
+                        //   Helper.numFormat(this.data.playsCount),
+                        //   style: TextStyle(
+                        //     fontSize: 14,
+                        //     color: Colors.white,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
                 ),
-                !this.data.needVip ? null : Positioned(
-                  left: 0,
-                  top: 0,
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(5, 2, 10, 2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(4),
-                        bottomRight: Radius.circular(20),
+                !this.data.needVip
+                    ? null
+                    : Positioned(
+                        left: 0,
+                        top: 0,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(5, 2, 10, 2),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(4),
+                              bottomRight: Radius.circular(20),
+                            ),
+                            gradient: LinearGradient(
+                                colors: [Color(0xFFA17551), Color(0xFFCCBEB5)]),
+                          ),
+                          child: Text(
+                            'VIP',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ),
-                      gradient: LinearGradient(
-                          colors: [Color(0xFFA17551), Color(0xFFCCBEB5)]),
-                    ),
-                    child: Text(
-                      'VIP',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
               ].where((item) => item != null).toList(),
             ),
           ),
         ),
         Padding(padding: EdgeInsets.only(top: 5)),
         SizedBox(
-          height: 40,
-          child: Text(
-            this.data.title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF333333),
+          height: 15,
+          child: Align(
+            child: Text(
+              this.data.price,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF333333),
+              ),
             ),
+            alignment: Alignment.centerLeft,
+          ),
+        ),
+        SizedBox(
+          height: 13,
+          child: Align(
+            child: Text(
+              this.data.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w200,
+                color: Color(0xFF333333),
+              ),
+            ),
+            alignment: Alignment.centerLeft,
+          ),
+        ),
+        SizedBox(
+          height: 13,
+          child: Align(
+            child: Text(
+              this.data.category,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w200,
+                color: Color(0xFF333333),
+              ),
+            ),
+            alignment: Alignment.centerLeft,
           ),
         ),
       ],
@@ -124,6 +162,8 @@ class Helper {
 class ProgrammeViewModel {
   /// 节目名称
   final String title;
+  final String category;
+  final String price;
 
   /// 播放量
   final int playsCount;
@@ -136,6 +176,8 @@ class ProgrammeViewModel {
 
   const ProgrammeViewModel({
     this.title,
+    this.category,
+    this.price,
     this.playsCount,
     this.coverImgUrl,
     this.needVip,

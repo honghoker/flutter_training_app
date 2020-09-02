@@ -11,7 +11,7 @@ class GuessLikeList extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            '猜你喜欢',
+            '원피스',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -21,7 +21,7 @@ class GuessLikeList extends StatelessWidget {
           Row(
             children: <Widget>[
               Text(
-                '更多',
+                '더보기',
                 style: TextStyle(
                   fontSize: 15,
                   color: Color(0xFF666666),
@@ -39,17 +39,17 @@ class GuessLikeList extends StatelessWidget {
     );
   }
 
-  Widget renderBody() {
+  Widget renderBody(double itemWidth, double itemHeight) {
     return GridView.builder(
       shrinkWrap: true,
       itemCount: programmeList.length,
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.symmetric(horizontal: 16),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: (itemWidth / itemHeight),
         crossAxisCount: 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        childAspectRatio: 0.7,
       ),
       itemBuilder: (context, index) {
         return Programme(data: programmeList[index]);
@@ -59,13 +59,17 @@ class GuessLikeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 1.8;
+    final double itemWidth = size.width / 2;
+
     return Container(
       color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           this.renderHeader(),
-          this.renderBody(),
+          this.renderBody(itemWidth, itemHeight),
         ],
       ),
     );

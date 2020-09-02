@@ -105,7 +105,8 @@ class HomePage extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           return FlatButton(
-            onPressed: () => Navigator.pushNamed(context, DEMOS[index].routeName),
+            onPressed: () =>
+                Navigator.pushNamed(context, DEMOS[index].routeName),
             color: COLORS[index % COLORS.length],
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
